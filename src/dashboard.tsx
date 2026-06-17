@@ -732,13 +732,13 @@ export default function Dashboard() {
       <table className="min-w-[760px] w-full text-sm">
         <thead className="bg-white text-left text-[#111827]">
           <tr>
-            <Th>FlowID</Th>
-            <Th>Src IP:Port</Th>
-            <Th>Dest IP:Port</Th>
-            <Th>Prediction</Th>
-            <Th>Action</Th>
-            <Th>RiskScore</Th>
-            <Th>Details</Th>
+            <Th>흐름 ID</Th>
+            <Th>출발지 IP:포트</Th>
+            <Th>목적지 IP:포트</Th>
+            <Th>분석 결과</Th>
+            <Th>권장 조치</Th>
+            <Th>위험 점수</Th>
+            <Th>상세</Th>
           </tr>
         </thead>
         <tbody>
@@ -761,8 +761,8 @@ export default function Dashboard() {
                   className="text-[#111827] transition hover:text-gray-600 disabled:cursor-wait disabled:opacity-60"
                 >
                   {detailLoadingId === item.flowId
-                    ? "Loading..."
-                    : "View Details"}
+                    ? "불러오는 중..."
+                    : "상세 보기"}
                 </button>
               </Td>
             </tr>
@@ -967,8 +967,8 @@ function DetailModal({
       <div className="max-h-[96vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-white text-[#111827] shadow-2xl">
         <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
           <div>
-            <h3 className="text-xl font-bold">Traffic Detail</h3>
-            <p className="mt-1 text-sm text-gray-600">FlowID {detail.flowId}</p>
+            <h3 className="text-xl font-bold">트래픽 상세 정보</h3>
+            <p className="mt-1 text-sm text-gray-600">흐름 ID {detail.flowId}</p>
           </div>
           <button
             type="button"
@@ -984,14 +984,14 @@ function DetailModal({
           <div className="rounded-xl bg-white p-5 border border-gray-200">
             <h4 className="mb-4 font-semibold">Flow Info</h4>
             <div className="space-y-3 text-sm">
-              <DetailRow label="Source IP" value={detail.srcIp} />
-              <DetailRow label="Source Port" value={detail.srcPort} />
-              <DetailRow label="Destination IP" value={detail.dstIp} />
-              <DetailRow label="Destination Port" value={detail.dstPort} />
-              <DetailRow label="Protocol" value={detail.protocol} />
-              <DetailRow label="Start Time" value={detail.startTime} />
-              <DetailRow label="End Time" value={detail.endTime} />
-              <DetailRow label="TCP Flags" value={detail.tcpFlags} />
+              <DetailRow label="출발지 IP" value={detail.srcIp} />
+              <DetailRow label="출발지 포트" value={detail.srcPort} />
+              <DetailRow label="목적지 IP" value={detail.dstIp} />
+              <DetailRow label="목적지 포트" value={detail.dstPort} />
+              <DetailRow label="통신 방식" value={detail.protocol} />
+              <DetailRow label="시작 시간" value={detail.startTime} />
+              <DetailRow label="종료 시간" value={detail.endTime} />
+              <DetailRow label="TCP 플래그" value={detail.tcpFlags} />
             </div>
           </div>
 
@@ -999,13 +999,13 @@ function DetailModal({
             <h4 className="mb-4 font-semibold">AI Analysis</h4>
             {aiResult ? (
               <div className="space-y-3 text-sm">
-                <DetailRow label="Model" value={aiResult.modelName} />
-                <DetailRow label="Prediction" value={aiResult.prediction} />
-                <DetailRow label="Attack Type" value={aiResult.attackType} />
-                <DetailRow label="Confidence" value={aiResult.confidence} />
-                <DetailRow label="Risk Score" value={aiResult.riskScore} />
-                <DetailRow label="Action" value={aiResult.action} />
-                <DetailRow label="Analyzed At" value={aiResult.analyzedAt} />
+                <DetailRow label="모델" value={aiResult.modelName} />
+                <DetailRow label="분석 결과" value={aiResult.prediction} />
+                <DetailRow label="공격 유형" value={aiResult.attackType} />
+                <DetailRow label="신뢰도" value={aiResult.confidence} />
+                <DetailRow label="위험 점수" value={aiResult.riskScore} />
+                <DetailRow label="권장 조치" value={aiResult.action} />
+                <DetailRow label="분석 시각" value={aiResult.analyzedAt} />
               </div>
             ) : (
               <p className="text-sm text-gray-600">No AI analysis data.</p>
